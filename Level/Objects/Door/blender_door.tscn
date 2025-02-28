@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://crhjr5b70stun"]
+
+[ext_resource type="PackedScene" uid="uid://befwqcnvt1f3j" path="res://assets/models/objects/door.blend" id="1_ag0ob"]
+[ext_resource type="PackedScene" uid="uid://dd2m5cl54asg" path="res://assets/textures/objects/wood/plywood_4k.blend" id="2_o23k6"]
+
+[node name="door" instance=ExtResource("1_ag0ob")]
+
+[node name="plywood_4k" parent="." index="2" instance=ExtResource("2_o23k6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99766, 0, -0.0225713)

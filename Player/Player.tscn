@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://di1igfjqid14s"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_55ck6"]
+[ext_resource type="PackedScene" uid="uid://c6t4xdmqumph0" path="res://UI/Player HUD/PlayerHUD.tscn" id="2_i8rtb"]
+[ext_resource type="Script" path="res://Player/CameraHandler.gd" id="2_u1fml"]
+[ext_resource type="AudioStream" uid="uid://bgmw8dxt3dcbe" path="res://Resources/Sounds/step_dirt.tres" id="3_d30jc"]
+[ext_resource type="Script" path="res://Player/InteractionHandler.gd" id="4_4f32q"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7equ2"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c5mqh"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qcl5m"]
+radius = 0.4
+height = 1.0
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(1, 1.25056e-12, 0, 2.92033e-12, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_55ck6")
+
+[node name="PlayerHeightRayCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 1.8, 0)
+
+[node name="PlaceholderShape" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -2.92033e-12, 0, 2.92033e-12, 1, 0, 0, 0, 1, -0.005, 0.9, -0.007)
+mesh = SubResource("CapsuleMesh_7equ2")
+
+[node name="StandingCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, -2.92033e-12, 0, 2.92033e-12, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_c5mqh")
+
+[node name="CrouchingCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, -2.92033e-12, 0, 2.92033e-12, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CapsuleShape3D_qcl5m")
+disabled = true
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 1.25056e-12, 0, 2.92033e-12, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_u1fml")
+
+[node name="CameraSocket" type="Node3D" parent="Head"]
+
+[node name="Camera" type="Camera3D" parent="Head/CameraSocket"]
+transform = Transform3D(1, -8.34178e-12, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="InteractionRayCast" type="RayCast3D" parent="Head/CameraSocket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00389576, -2.38419e-07, 0.00391626)
+target_position = Vector3(0, 0, -2)
+script = ExtResource("4_4f32q")
+
+[node name="PlayerHUD" parent="." instance=ExtResource("2_i8rtb")]
+
+[node name="FeetAudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_d30jc")

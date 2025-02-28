@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6t4xdmqumph0"]
+
+[ext_resource type="Script" path="res://UI/Player HUD/PlayerHUD.gd" id="1_26hqy"]
+[ext_resource type="Texture2D" uid="uid://g6h5mgwsri8j" path="res://assets/textures/ui/hurt.png" id="2_mwj4u"]
+
+[node name="Player HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_26hqy")
+
+[node name="Hurt Overlay" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mwj4u")
+expand_mode = 1
