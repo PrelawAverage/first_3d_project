@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://t4oqeh8nhsod"]
+
+[ext_resource type="Script" path="res://Player/test/GravityPlayer.gd" id="1_gqnoo"]
+[ext_resource type="Script" path="res://Player/test/GravityCameraHandler.gd" id="3_6g0bu"]
+[ext_resource type="AudioStream" uid="uid://bgmw8dxt3dcbe" path="res://Resources/Sounds/step_dirt.tres" id="4_14ifp"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7equ2"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c5mqh"]
+radius = 0.4
+height = 1.8
+
+[node name="GravityPlayer" type="RigidBody3D"]
+transform = Transform3D(1, 1.25056e-12, 0, 2.92033e-12, 1, 0, 0, 0, 1, 0, 0, 0)
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_gqnoo")
+
+[node name="PlayerHeightRayCast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 1.8, 0)
+
+[node name="PlaceholderShape" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, -2.92033e-12, 0, 2.92033e-12, 1, 0, 0, 0, 1, -0.005, 0.9, -0.007)
+mesh = SubResource("CapsuleMesh_7equ2")
+
+[node name="StandingCollisionShape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, -2.92033e-12, 0, 2.92033e-12, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_c5mqh")
+
+[node name="FeetAudioStreamPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_14ifp")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+script = ExtResource("3_6g0bu")
+
+[node name="CameraSocket" type="Node3D" parent="Head"]
+
+[node name="Camera3D" type="Camera3D" parent="Head/CameraSocket"]

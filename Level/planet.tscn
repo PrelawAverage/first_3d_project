@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsw1ovu4j1tl4"]
+
+[ext_resource type="PackedScene" uid="uid://t4oqeh8nhsod" path="res://Player/test/GravityPlayer.tscn" id="1_gxd2f"]
+[ext_resource type="Script" path="res://Level/Nodes/directional_gravity_field.gd" id="1_khnel"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1kf2v"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fjyae"]
+sky_material = SubResource("ProceduralSkyMaterial_1kf2v")
+
+[sub_resource type="Environment" id="Environment_oi6c6"]
+background_mode = 2
+sky = SubResource("Sky_fjyae")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="SphereMesh" id="SphereMesh_6m285"]
+radius = 15.0
+height = 30.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hi67b"]
+radius = 15.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_fio07"]
+radius = 30.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_vo4ok"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2xlve"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kyyba"]
+size = Vector3(50, 50, 50)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Planet" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40.2413, 0.916456, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Planet"]
+environment = SubResource("Environment_oi6c6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Planet"]
+transform = Transform3D(-0.866023, -0.349834, 0.357239, 0, 0.714473, 0.699663, -0.500003, 0.605925, -0.61875, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Planet"]
+mesh = SubResource("SphereMesh_6m285")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet"]
+shape = SubResource("SphereShape3D_hi67b")
+
+[node name="Area3D" type="Area3D" parent="Planet"]
+gravity_space_override = 3
+gravity_point = true
+gravity = 12.0
+linear_damp_space_override = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet/Area3D"]
+shape = SubResource("SphereShape3D_fio07")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 1.76208e-05, -3.46057e-07, 1.76208e-05, -1, -2.40329e-06, -3.46059e-07, 2.40329e-06, -1, 22.9696, 22.692, -7.25491)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_vo4ok")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_2xlve")
+
+[node name="DirectionalArea3D" type="Area3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.577589, 4.76837e-07, 0.0147457)
+input_ray_pickable = false
+gravity_space_override = 3
+gravity = 12.0
+script = ExtResource("1_khnel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/DirectionalArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.554794, 0, 0)
+shape = SubResource("BoxShape3D_kyyba")
+
+[node name="GravityPlayer" parent="." instance=ExtResource("1_gxd2f")]
+transform = Transform3D(1, -0.000565558, -6.41147e-05, 0.000565541, 1, -0.000305617, 6.42629e-05, 0.000305585, 1, 13.5719, 16.2646, 1.44052)

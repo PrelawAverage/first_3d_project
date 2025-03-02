@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://crfh4507jorto"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hurgt"]
+size = Vector3(1, 1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ph2h0"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_01wb4"]
+size = Vector3(1, 1, 2)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_owj1v"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_baj7i"]
+
+[node name="HoverBike" type="RigidBody3D"]
+disable_mode = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_hurgt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("BoxMesh_ph2h0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.91706, -0.398749, 0, 0.398749, 0.91706, 0, 0.864709, 1.17112)
+mesh = SubResource("BoxMesh_ph2h0")
+
+[node name="MeshInstance3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.91706, -0.398749, 0, 0.398749, 0.91706, 0, 0.864709, 1.17112)
+shape = SubResource("BoxShape3D_01wb4")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.75, 0.5, -1)
+shape = SubResource("CylinderShape3D_owj1v")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999997, 0.00148433, -0.00204224, -0.00203922, -0.00204228, -0.999996, -0.00148847, 0.999997, -0.00203926, 0.75, 0.5, -1)
+mesh = SubResource("CylinderMesh_baj7i")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.75, 0.5, -1)
+shape = SubResource("CylinderShape3D_owj1v")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999997, 0.00148433, -0.00204224, -0.00203922, -0.00204228, -0.999996, -0.00148847, 0.999997, -0.00203926, -0.75, 0.5, -1)
+mesh = SubResource("CylinderMesh_baj7i")

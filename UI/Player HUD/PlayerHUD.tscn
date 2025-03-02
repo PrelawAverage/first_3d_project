@@ -1,20 +1,18 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6t4xdmqumph0"]
 
-[ext_resource type="Script" path="res://UI/Player HUD/PlayerHUD.gd" id="1_26hqy"]
+[ext_resource type="Script" path="res://UI/Player HUD/player_hud.gd" id="1_vi1nm"]
 [ext_resource type="Texture2D" uid="uid://g6h5mgwsri8j" path="res://assets/textures/ui/hurt.png" id="2_mwj4u"]
 
-[node name="Player HUD" type="Control"]
+[node name="PlayerHUD" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("1_26hqy")
+script = ExtResource("1_vi1nm")
 
-[node name="Hurt Overlay" type="TextureRect" parent="."]
-modulate = Color(1, 1, 1, 0)
+[node name="DamageOverlay" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,3 +21,16 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_mwj4u")
 expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health Display" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+
+[node name="Gravity Display" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
